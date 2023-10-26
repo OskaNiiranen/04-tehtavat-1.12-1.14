@@ -14,16 +14,33 @@ const App = () => {
 
   const [selected, setSelected] = useState(0);
 
+  // Initialize an array for storing votes for each anecdote
+  const initialVotes = new Array(anecdotes.length).fill(0);
+  const [votes, setVotes] = useState(initialVotes);
+
   const handleNextAnecdote = () => {
     // Generate a random index for the anecdotes array
     const randomIndex = Math.floor(Math.random() * anecdotes.length);
     setSelected(randomIndex);
   };
 
+  const handleVote = () => {
+    const updatedVotes = [...votes];
+    updatedVotes[selected] += 1;
+    setVotes(updatedVotes);
+  };
+
   return (
     <div>
-      <div>{anecdotes[selected]}</div>
-      <button onClick={handleNextAnecdote}>next anecdote</button>
+      <div>
+        <h2>Anecdote of the Day</h2>
+        {anecdotes[selected]}
+      </div>
+      <div>
+        <p>Votes: {votes[selected]}</p>
+        <button onClick={handleVote}>Vote</button>
+        <button onClick={handleNextAnecdote}>Next Anecdote</button>
+      </div>
     </div>
   );
 };
