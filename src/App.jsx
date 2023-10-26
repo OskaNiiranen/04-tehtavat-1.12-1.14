@@ -30,6 +30,9 @@ const App = () => {
     setVotes(updatedVotes);
   };
 
+  // Find the index of the anecdote with the most votes
+  const mostVotedIndex = votes.indexOf(Math.max(...votes));
+
   return (
     <div>
       <div>
@@ -40,6 +43,10 @@ const App = () => {
         <p>Votes: {votes[selected]}</p>
         <button onClick={handleVote}>Vote</button>
         <button onClick={handleNextAnecdote}>Next Anecdote</button>
+      </div>
+      <div>
+        <h2>Most Voted Anecdote</h2>
+        {votes[mostVotedIndex] > 0 ? anecdotes[mostVotedIndex] : "No votes yet"}
       </div>
     </div>
   );
